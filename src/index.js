@@ -4,7 +4,11 @@ import { engine } from 'express-handlebars';
 import {join, dirname} from 'path'
 import { fileURLToPath } from "url"
 
-import clientesRoutes from './routes/clientes.routes.js'
+import clientesRoutes from './routes/clientes.routes.js';
+import productosRoutes from './routes/productos.routes.js';
+import pagosRoutes from './routes/pagos.routes.js';
+
+
 
 //Initializacion
 const app=express();
@@ -15,6 +19,10 @@ app.set('port',process.env.PORT || 3000);
 
 //configurando carpeta para las vistas
 app.set('views', join(__dirname, './views'));
+
+app.use('/clientes', clientesRoutes); 
+app.use('/productos', productosRoutes);
+app.use('/pagos', pagosRoutes);
 
 
 
@@ -40,6 +48,9 @@ app.get('/', (req, res)=>{
 })
 
 app.use(clientesRoutes)
+app.use(productosRoutes)
+app.use(pagosRoutes)
+
 
 //Publics Files
 //funcion Join, public los usuarios pueden utilizar lo q hay en la carpeta public
